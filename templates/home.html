@@ -1,0 +1,28 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  <h2>Hi {{ user.get_full_name }}!</h2>
+  <ul>
+    <li>Username: {{ user.username }}</li>
+    <li>Location: {{ user.profile.bio }}</li>
+    <li>Company: {{ user.profile.company }}</li>
+    <li>Birth_date: {{ user.profile.birth_date }}</li>
+  </ul>
+  <p><a href="{% url 'world:map' %}">world map</a></p>
+  <p><a href="{% url 'accounts:update_profile' %}">update_profile</a></p>
+  <p><a href="{% url 'password_reset' %}">Reset Password</a></p>
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+  <a href="{% url 'accounts:signup' %}">Sign up</a>
+{% endif %}
+
+
+
+
+{% endblock %}
